@@ -1,0 +1,11 @@
+[gd_scene load_steps=4 format=3 uid="uid://ctv6ax78amffy"]
+
+[ext_resource type="Script" path="res://src/script/Player1.gd" id="1_0o0nh"]
+[ext_resource type="PackedScene" uid="uid://btts0q2p47y4f" path="res://src/scenes/Actors/actors.tscn" id="1_uvbot"]
+[ext_resource type="Texture2D" uid="uid://cupdns0sac7ng" path="res://assets/Sprite/spiked_ship_red .PNG" id="3_hnaft"]
+
+[node name="Player1" instance=ExtResource("1_uvbot")]
+script = ExtResource("1_0o0nh")
+
+[node name="Sprite" parent="." index="0"]
+texture = ExtResource("3_hnaft")

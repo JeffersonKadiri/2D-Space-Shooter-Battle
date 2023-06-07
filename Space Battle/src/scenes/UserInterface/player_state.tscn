@@ -1,0 +1,44 @@
+[gd_scene load_steps=6 format=3 uid="uid://c12c2icbysd64"]
+
+[ext_resource type="Theme" uid="uid://dmghttn1tgsem" path="res://assets/Fonts/red_button.tres" id="1_riwtu"]
+[ext_resource type="Texture2D" uid="uid://srfi87w01lba" path="res://assets/Sprite/gamepad2.png" id="2_mh547"]
+[ext_resource type="Theme" uid="uid://c2uv4pfxarfco" path="res://assets/Fonts/green_button.tres" id="3_cti4i"]
+[ext_resource type="FontFile" uid="uid://dr7w04rr5gi24" path="res://assets/Fonts/SitkaB.ttc" id="3_dgjbu"]
+
+[sub_resource type="Theme" id="Theme_ut7ag"]
+Label/colors/font_shadow_color = Color(0, 0, 0, 0.796078)
+Label/constants/shadow_offset_x = 1
+Label/constants/shadow_offset_y = 2
+Label/constants/shadow_outline_size = 7
+Label/font_sizes/font_size = 22
+Label/fonts/font = ExtResource("3_dgjbu")
+
+[node name="VersusContainer" type="HBoxContainer"]
+offset_right = 416.0
+offset_bottom = 82.0
+theme_override_constants/separation = -14
+metadata/_edit_group_ = true
+
+[node name="ComputerButton" type="Button" parent="."]
+layout_mode = 2
+size_flags_horizontal = 3
+theme = ExtResource("1_riwtu")
+toggle_mode = true
+button_pressed = true
+text = "Computer"
+icon = ExtResource("2_mh547")
+
+[node name="Label" type="Label" parent="."]
+layout_mode = 2
+size_flags_horizontal = 3
+theme = SubResource("Theme_ut7ag")
+text = "Player 2"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="HumanButton" type="Button" parent="."]
+layout_mode = 2
+size_flags_horizontal = 3
+theme = ExtResource("3_cti4i")
+text = "Human"
+icon = ExtResource("2_mh547")

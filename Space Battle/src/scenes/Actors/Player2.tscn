@@ -1,0 +1,12 @@
+[gd_scene load_steps=4 format=3 uid="uid://cduja0diuujgf"]
+
+[ext_resource type="PackedScene" uid="uid://btts0q2p47y4f" path="res://src/scenes/Actors/actors.tscn" id="1_5fjmm"]
+[ext_resource type="Script" path="res://src/script/computer.gd" id="2_pyvhp"]
+[ext_resource type="Texture2D" uid="uid://pc2gxd4xfhp2" path="res://assets/Sprite/spiked_ship_green.PNG" id="3_otro6"]
+
+[node name="Player2" instance=ExtResource("1_5fjmm")]
+script = ExtResource("2_pyvhp")
+Bullet = null
+
+[node name="Sprite" parent="." index="0"]
+texture = ExtResource("3_otro6")

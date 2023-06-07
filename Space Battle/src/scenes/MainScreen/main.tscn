@@ -1,0 +1,155 @@
+[gd_scene load_steps=14 format=3 uid="uid://ml57t5id8567"]
+
+[ext_resource type="Script" path="res://src/script/main.gd" id="1_4ipca"]
+[ext_resource type="Texture2D" uid="uid://0q38vt0vrijv" path="res://assets/Sprite/Background-2.jpg" id="2_u86ky"]
+[ext_resource type="PackedScene" uid="uid://d1go3hbhasnms" path="res://src/scenes/UserInterface/user_interface.tscn" id="4_7edvb"]
+[ext_resource type="PackedScene" uid="uid://ctv6ax78amffy" path="res://src/scenes/Actors/Player1.tscn" id="4_82q7j"]
+[ext_resource type="Texture2D" uid="uid://da6u1fq0otjv6" path="res://assets/Sprite/exp2_0.png" id="5_e1tni"]
+[ext_resource type="AudioStream" uid="uid://syw0mn7py75e" path="res://assets/Music/explosion_somewhere_far.mp3" id="6_4awaf"]
+[ext_resource type="PackedScene" uid="uid://dqqnn2qasdwhy" path="res://src/scenes/UserInterface/HUD.tscn" id="7_q0ipd"]
+[ext_resource type="PackedScene" uid="uid://bqxxeu7cj5bwl" path="res://src/scenes/Objects/bullet.tscn" id="8_galtd"]
+[ext_resource type="AudioStream" uid="uid://c58j0hf0sc8v8" path="res://assets/Music/Kim Lightyear - Falling Stars.mp3" id="8_p2g8j"]
+[ext_resource type="PackedScene" uid="uid://cduja0diuujgf" path="res://src/scenes/Actors/Player2.tscn" id="8_pfkps"]
+
+[sub_resource type="Animation" id="Animation_1igfh"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [1]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:visible")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+
+[sub_resource type="Animation" id="Animation_mgoqd"]
+resource_name = "explode"
+length = 2.9
+step = 0.2
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("ExplosionSound:playing")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:frame")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.2, 0.4, 0.6, 0.8, 1, 1.2, 1.4, 1.6, 1.8, 2, 2.2, 2.4, 2.6, 2.8),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath(".:visible")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 2.9),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [true, false]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_f8fd1"]
+_data = {
+"RESET": SubResource("Animation_1igfh"),
+"explode": SubResource("Animation_mgoqd")
+}
+
+[node name="Main" type="Node2D"]
+script = ExtResource("1_4ipca")
+metadata/_edit_group_ = true
+
+[node name="TextureRect" type="TextureRect" parent="."]
+offset_right = 1152.0
+offset_bottom = 648.0
+texture = ExtResource("2_u86ky")
+expand_mode = 1
+stretch_mode = 6
+
+[node name="Background" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("8_p2g8j")
+attenuation = 2.82843
+area_mask = 0
+
+[node name="Position1" type="Marker2D" parent="."]
+position = Vector2(100, 318)
+
+[node name="Position2" type="Marker2D" parent="."]
+position = Vector2(1064, 318)
+
+[node name="Explosion" type="Sprite2D" parent="."]
+visible = false
+position = Vector2(2.38419e-07, -28)
+scale = Vector2(1.879, 1.484)
+texture = ExtResource("5_e1tni")
+hframes = 4
+vframes = 4
+frame = 1
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Explosion"]
+libraries = {
+"": SubResource("AnimationLibrary_f8fd1")
+}
+
+[node name="ExplosionSound" type="AudioStreamPlayer2D" parent="Explosion"]
+position = Vector2(-1.86269, 2.35849)
+scale = Vector2(0.532198, 0.673854)
+stream = ExtResource("6_4awaf")
+volume_db = 8.233
+attenuation = 0.435275
+
+[node name="Player1" parent="." instance=ExtResource("4_82q7j")]
+position = Vector2(100, 318)
+rotation = 1.5708
+bullet_speed = 500.0
+
+[node name="Player2" parent="." instance=ExtResource("8_pfkps")]
+position = Vector2(1064, 318)
+rotation = -1.5708
+Bullet = ExtResource("8_galtd")
+bullet_speed = -500.0
+
+[node name="UserInterface" parent="." instance=ExtResource("4_7edvb")]
+offset_right = 1152.0
+offset_bottom = 648.0
+
+[node name="HUD" parent="." instance=ExtResource("7_q0ipd")]
+process_mode = 3
+
+[connection signal="animation_finished" from="Explosion/AnimationPlayer" to="." method="_on_Ship_Exploded_finished"]
+[connection signal="hit" from="Player1" to="UserInterface" method="_on_player_1_hit"]
+[connection signal="hit" from="Player2" to="UserInterface" method="_on_player_2_hit"]
+[connection signal="gameState" from="UserInterface" to="." method="_on_game_state"]
+[connection signal="player1_dead" from="UserInterface" to="." method="_on_player_1_dead"]
+[connection signal="player2_dead" from="UserInterface" to="." method="_on_player_2_dead"]
+[connection signal="startgame" from="HUD" to="." method="start_game_button_pressed"]

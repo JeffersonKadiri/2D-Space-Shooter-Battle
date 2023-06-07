@@ -1,0 +1,123 @@
+[gd_scene load_steps=14 format=3 uid="uid://dqqnn2qasdwhy"]
+
+[ext_resource type="FontFile" uid="uid://nyincbnj43g1" path="res://assets/Fonts/segoeuib.ttf" id="1_1n80d"]
+[ext_resource type="Script" path="res://src/script/HUD.gd" id="1_e60pc"]
+[ext_resource type="Texture2D" uid="uid://bbwbvfg2esmur" path="res://assets/Sprite/Background-1.jpg" id="2_iwr1l"]
+[ext_resource type="Theme" uid="uid://c2uv4pfxarfco" path="res://assets/Fonts/green_button.tres" id="3_o3gag"]
+[ext_resource type="AudioStream" uid="uid://ctb7rfjdvpypt" path="res://assets/Music/Kim Lightyear - Dino.mp3" id="3_wheqs"]
+[ext_resource type="Texture2D" uid="uid://srfi87w01lba" path="res://assets/Sprite/gamepad2.png" id="4_vebvl"]
+[ext_resource type="FontFile" uid="uid://dr7w04rr5gi24" path="res://assets/Fonts/SitkaB.ttc" id="4_x3k2b"]
+[ext_resource type="Theme" uid="uid://cv0mkx71f20su" path="res://assets/Fonts/blue_button.tres" id="6_8e0ol"]
+[ext_resource type="Texture2D" uid="uid://cvhiegw6ott4o" path="res://assets/Sprite/forward.png" id="6_uf1jd"]
+[ext_resource type="Theme" uid="uid://dmghttn1tgsem" path="res://assets/Fonts/red_button.tres" id="6_uyq1x"]
+[ext_resource type="PackedScene" uid="uid://cq2uth17wwo3x" path="res://src/scenes/UserInterface/quit_button.tscn" id="7_0ffbb"]
+[ext_resource type="Theme" uid="uid://c452kju81mhq1" path="res://assets/Fonts/yellow_button.tres" id="9_fdgia"]
+
+[sub_resource type="Theme" id="Theme_sfdbh"]
+Label/colors/font_shadow_color = Color(0, 0, 0, 0.796078)
+Label/constants/shadow_offset_x = 1
+Label/constants/shadow_offset_y = 2
+Label/constants/shadow_outline_size = 7
+Label/font_sizes/font_size = 22
+Label/fonts/font = ExtResource("4_x3k2b")
+
+[node name="HUD" type="CanvasLayer"]
+script = ExtResource("1_e60pc")
+metadata/_edit_group_ = true
+
+[node name="TextureRect" type="TextureRect" parent="."]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("2_iwr1l")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="Title" type="Label" parent="."]
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -196.0
+offset_top = 114.0
+offset_right = 238.0
+offset_bottom = 217.0
+grow_horizontal = 2
+theme_override_colors/font_shadow_color = Color(0.321569, 0.239216, 0.239216, 1)
+theme_override_constants/shadow_offset_x = -8
+theme_override_constants/shadow_offset_y = 6
+theme_override_constants/shadow_outline_size = 10
+theme_override_fonts/font = ExtResource("1_1n80d")
+theme_override_font_sizes/font_size = 75
+text = "Space Battle"
+
+[node name="HBoxContainer" type="HBoxContainer" parent="."]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -245.5
+offset_top = -50.5
+offset_right = 245.5
+offset_bottom = 50.5
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="ComputerButton" type="Button" parent="HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme = ExtResource("6_uyq1x")
+toggle_mode = true
+button_pressed = true
+text = "Computer"
+icon = ExtResource("4_vebvl")
+
+[node name="Label" type="Label" parent="HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme = SubResource("Theme_sfdbh")
+text = "Player 2"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="HumanButton" type="Button" parent="HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme = ExtResource("3_o3gag")
+text = "Human"
+icon = ExtResource("4_vebvl")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -143.0
+offset_top = -216.0
+offset_right = 143.0
+offset_bottom = -61.0
+grow_horizontal = 2
+grow_vertical = 0
+theme_override_constants/separation = 10
+
+[node name="PlayButton" type="Button" parent="VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+theme = ExtResource("6_8e0ol")
+text = "Start Game"
+icon = ExtResource("6_uf1jd")
+
+[node name="QuitButton" parent="VBoxContainer" instance=ExtResource("7_0ffbb")]
+layout_mode = 2
+theme = ExtResource("9_fdgia")
+
+[node name="MainMusic" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("3_wheqs")
+autoplay = true
+
+[connection signal="pressed" from="HBoxContainer/ComputerButton" to="." method="_on_computer_button_pressed"]
+[connection signal="pressed" from="HBoxContainer/HumanButton" to="." method="_on_human_button_pressed"]
+[connection signal="button_up" from="VBoxContainer/PlayButton" to="." method="_on_start_game"]

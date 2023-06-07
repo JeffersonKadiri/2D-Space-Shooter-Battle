@@ -1,0 +1,196 @@
+[gd_scene load_steps=15 format=3 uid="uid://d1go3hbhasnms"]
+
+[ext_resource type="PackedScene" uid="uid://d1j6csnnid5t3" path="res://src/scenes/Objects/health_bar.tscn" id="1_5ssam"]
+[ext_resource type="Script" path="res://src/script/user_interface.gd" id="1_p1g2s"]
+[ext_resource type="FontFile" uid="uid://dr7w04rr5gi24" path="res://assets/Fonts/SitkaB.ttc" id="3_sqc11"]
+[ext_resource type="Theme" uid="uid://c2uv4pfxarfco" path="res://assets/Fonts/green_button.tres" id="5_cc27u"]
+[ext_resource type="Texture2D" uid="uid://cvhiegw6ott4o" path="res://assets/Sprite/forward.png" id="5_twro0"]
+[ext_resource type="Texture2D" uid="uid://c15ch337pxwoo" path="res://assets/Sprite/pause.png" id="5_w8go2"]
+[ext_resource type="Texture2D" uid="uid://bwiq13ttcsto8" path="res://assets/Sprite/home.png" id="6_2ofe0"]
+[ext_resource type="PackedScene" uid="uid://cq2uth17wwo3x" path="res://src/scenes/UserInterface/quit_button.tscn" id="7_gauwm"]
+[ext_resource type="Theme" uid="uid://cv0mkx71f20su" path="res://assets/Fonts/blue_button.tres" id="7_qncn2"]
+[ext_resource type="Theme" uid="uid://dmghttn1tgsem" path="res://assets/Fonts/red_button.tres" id="10_h67cs"]
+
+[sub_resource type="Theme" id="Theme_0jd2u"]
+Label/colors/font_shadow_color = Color(0.0470588, 0.0470588, 0.0470588, 1)
+Label/constants/shadow_outline_size = 6
+Label/font_sizes/font_size = 41
+Label/fonts/font = ExtResource("3_sqc11")
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_e4nbm"]
+bg_color = Color(0.462745, 0.85098, 0.2, 1)
+border_width_left = 8
+border_width_bottom = 8
+border_color = Color(0.964706, 0.964706, 0.964706, 1)
+corner_radius_bottom_left = 68
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_6j8qu"]
+bg_color = Color(0.462745, 0.85098, 0.2, 1)
+border_width_bottom = 8
+border_color = Color(0.964706, 0.964706, 0.964706, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_yg3pe"]
+bg_color = Color(0.462745, 0.85098, 0.2, 1)
+border_width_right = 8
+border_width_bottom = 8
+border_color = Color(0.964706, 0.964706, 0.964706, 1)
+corner_radius_bottom_right = 68
+
+[node name="UserInterface" type="Control"]
+process_mode = 3
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_p1g2s")
+metadata/_edit_group_ = true
+
+[node name="Wall" type="ColorRect" parent="."]
+layout_mode = 1
+anchors_preset = 13
+anchor_left = 0.5
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -3.0
+offset_right = 7.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="HealthBar1" parent="." instance=ExtResource("1_5ssam")]
+layout_mode = 1
+offset_left = 10.0
+offset_right = 352.0
+offset_bottom = 74.0
+size_flags_horizontal = 3
+
+[node name="ScoreBoard" type="HBoxContainer" parent="."]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -192.5
+offset_right = 192.5
+offset_bottom = 74.0
+grow_horizontal = 2
+size_flags_horizontal = 3
+theme = SubResource("Theme_0jd2u")
+theme_override_constants/separation = 0
+
+[node name="Score1" type="Label" parent="ScoreBoard"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 1
+theme_override_styles/normal = SubResource("StyleBoxFlat_e4nbm")
+text = "0"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="PauseButton" type="Button" parent="ScoreBoard"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_styles/normal = SubResource("StyleBoxFlat_6j8qu")
+theme_override_styles/hover = SubResource("StyleBoxFlat_6j8qu")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_6j8qu")
+icon = ExtResource("5_w8go2")
+clip_text = true
+icon_alignment = 1
+
+[node name="Score2" type="Label" parent="ScoreBoard"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 1
+theme_override_styles/normal = SubResource("StyleBoxFlat_yg3pe")
+text = "0"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="HealthBar2" parent="." instance=ExtResource("1_5ssam")]
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -366.0
+offset_right = -10.0
+offset_bottom = 74.0
+grow_horizontal = 0
+size_flags_horizontal = 3
+
+[node name="Message" type="Label" parent="."]
+visible = false
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -234.5
+offset_top = -34.5
+offset_right = 234.5
+offset_bottom = 34.5
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_constants/shadow_offset_x = 2
+theme_override_constants/shadow_offset_y = 5
+theme_override_fonts/font = ExtResource("3_sqc11")
+theme_override_font_sizes/font_size = 65
+text = "Player 1 Wins"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="PauseOverlay" type="ColorRect" parent="."]
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 0.384314)
+
+[node name="VBoxContainer" type="VBoxContainer" parent="PauseOverlay"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -155.0
+offset_top = -128.0
+offset_right = 155.0
+offset_bottom = 128.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("5_cc27u")
+theme_override_constants/separation = 8
+
+[node name="ResumeButton" type="Button" parent="PauseOverlay/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+text = "Resume"
+icon = ExtResource("5_twro0")
+
+[node name="HomeButton" type="Button" parent="PauseOverlay/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+theme = ExtResource("7_qncn2")
+text = "Home"
+icon = ExtResource("6_2ofe0")
+
+[node name="QuitButton" parent="PauseOverlay/VBoxContainer" instance=ExtResource("7_gauwm")]
+layout_mode = 2
+theme = ExtResource("10_h67cs")
+
+[node name="MessageTimer" type="Timer" parent="."]
+process_mode = 1
+wait_time = 2.0
+one_shot = true
+
+[connection signal="gameOver" from="HealthBar1" to="." method="_on_Player1_Dead_game_over"]
+[connection signal="pressed" from="ScoreBoard/PauseButton" to="." method="_on_pause_button_pressed"]
+[connection signal="gameOver" from="HealthBar2" to="." method="_on_health_bar_2_game_over"]
+[connection signal="pressed" from="PauseOverlay/VBoxContainer/ResumeButton" to="." method="_on_resume_button_pressed"]
+[connection signal="pressed" from="PauseOverlay/VBoxContainer/HomeButton" to="." method="_on_home_button_pressed"]
+[connection signal="timeout" from="MessageTimer" to="." method="_on_message_timer_timeout"]

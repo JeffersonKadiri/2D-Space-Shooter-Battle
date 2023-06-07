@@ -1,0 +1,31 @@
+[gd_scene load_steps=4 format=3 uid="uid://bqxxeu7cj5bwl"]
+
+[ext_resource type="Script" path="res://src/script/bullet.gd" id="1_qcsjg"]
+[ext_resource type="Texture2D" uid="uid://bj7dnhn68ilol" path="res://assets/Sprite/ammo.png" id="2_k1g1e"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_n8ftr"]
+size = Vector2(9, 4)
+
+[node name="Bullet" type="Area2D" groups=["bullets"]]
+collision_layer = 2
+collision_mask = 3
+script = ExtResource("1_qcsjg")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+scale = Vector2(0.4375, 0.5)
+texture = ExtResource("2_k1g1e")
+flip_h = true
+vframes = 3
+frame = 1
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+visible = false
+shape = SubResource("RectangleShape2D_n8ftr")
+debug_color = Color(0.905882, 0.705882, 0, 1)
+
+[node name="VisibleOnScreenNotifier2D" type="VisibleOnScreenNotifier2D" parent="."]
+position = Vector2(2.38419e-07, -5.96046e-08)
+scale = Vector2(0.4, 0.2)
+
+[connection signal="area_entered" from="." to="." method="_on_area_entered"]
+[connection signal="screen_exited" from="VisibleOnScreenNotifier2D" to="." method="_on_screen_exited"]
